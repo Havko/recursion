@@ -1,27 +1,25 @@
-def merge_sort(a)
-	
-	
-	if a.length < 1
-		return
-	else
-	
-	
-	 
-	 	n = a.length
-	 	b = a.slice(0..((n/2)-1))
-	 	c = a.slice((n/2)..n)
-	 	
-		
-        if b[0] > c[0]
-        	a = b + c
-        else 
-        	a = c + b
-        end
-        merge_sort(b)
-		merge_sort(c)
-		
-	end
+def merge_sort array
+	return array if array.length <= 1
+	mid = array.length / 2
+	merge(merge_sort(array[0..mid - 1]), merge_sort(array[mid..-1]))
 end
-test = [4,3,2,1]
-	merge_sort(test)
+
+def merge(array1, array2)
+	merged_array = []
+	i, j = 0, 0
+	while i < array1.length && j < array2.length
+		if array1[i] < array2[j]
+			merged_array << array1[i]
+			i += 1
+		else
+			merged_array << array2[j]
+			j += 1
+		end
+	end
+	merged_array.concat array1[i..-1]
+	merged_array.concat array2[j..-1]
+end
+
+test = [5,4,6,3,5,7,5,8,1]
+ puts	merge_sort(test)
 
